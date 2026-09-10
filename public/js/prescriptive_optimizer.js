@@ -179,7 +179,7 @@ class PrescriptiveOptimizerEngine {
           <div class="action-card-left">
             <div style="display: flex; gap: 8px; align-items: center;">
               <span class="action-badge ${badgeClass}">${act.priority}</span>
-              <span style="font-size: 0.72rem; color: var(--accent-cyan); font-weight: 600;">${act.category}</span>
+              <span style="font-size: 0.72rem; color: var(--accent-orange); font-weight: 700;">${act.category}</span>
             </div>
             <div class="action-title">${act.action}</div>
             <div class="action-desc">${act.impact}</div>

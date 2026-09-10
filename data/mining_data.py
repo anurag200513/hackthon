@@ -581,16 +581,16 @@ def generate_3d_voxels(mine_id="balaghat", cutoff_grade=35.0):
                     # Assign category
                     if mn_grade >= 44.0:
                         grade_category = "High Grade (>44% Mn)"
-                        color = "#a855f7" # Vibrant purple
+                        color = "#ff6b00" # Electric Safety Orange
                     elif mn_grade >= 38.0:
                         grade_category = "Medium / Ferro Grade (38-44% Mn)"
-                        color = "#06b6d4" # Cyan
+                        color = "#f59e0b" # Warm Amber Orange
                     elif mn_grade >= 35.0:
                         grade_category = "Silico-Manganese Grade (35-38% Mn)"
-                        color = "#3b82f6" # Blue
+                        color = "#c2410c" # Deep Rust Orange
                     else:
                         grade_category = "Low Grade / Marginal (<35% Mn)"
-                        color = "#64748b" # Slate
+                        color = "#52525b" # Dark Zinc Slate
 
                     voxels.append({
                         "x": x,

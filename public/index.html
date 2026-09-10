@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOIL-PRAGYA | AI & Space Technology Manganese Reserve & Production Intelligence</title>
-  <meta name="description" content="Next-Generation AI/ML and Space Remote Sensing Platform for Manganese Reserve Identification and Production Shortfall Mitigation for MOIL Limited.">
+  <title>MOIL-PRAGYA | AI & Space Remote Sensing Mining Intelligence</title>
+  <meta name="description" content="Executive AI/ML and Space Remote Sensing Platform for Manganese Reserve Identification and Production Shortfall Mitigation for MOIL Limited.">
 
-  <!-- Google Fonts: Outfit & Inter -->
+  <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,56 +17,47 @@
   <!-- Leaflet CSS for GIS Mapping -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-  <!-- Application Styles -->
+  <!-- Application Styles (Black & Orange Theme) -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- Top App Navigation: Sleek & Compact -->
+  <!-- Top App Navigation: Simple, Executive & High-Contrast -->
   <header class="top-nav">
     <div class="brand-section">
       <div class="brand-logo">
-        <i class="fa-solid fa-gem"></i>
+        <i class="fa-solid fa-bolt"></i>
       </div>
       <div>
-        <h1 class="brand-title">MOIL-PRAGYA</h1>
-        <div class="brand-subtitle">Manganese Reserve &amp; Production Intelligence</div>
+        <h1 class="brand-title">MOIL<span>PRAGYA</span></h1>
+        <div class="brand-subtitle">Reserve Exploration &amp; Shortfall Mitigation</div>
       </div>
     </div>
 
-    <!-- Quick Stats Bar (Clean & Compact) -->
-    <div class="quick-stats-bar">
-      <div class="stat-pill">
-        <span class="stat-label">Reserves</span>
-        <strong class="stat-val" id="kpiReservesVal">24.8 MT</strong>
-        <span class="stat-sub" id="kpiReservesSub" style="display:none;">Type: Underground</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-pill">
-        <span class="stat-label">Grade</span>
-        <strong class="stat-val accent-cyan" id="kpiGradeVal">44.5% Mn</strong>
-        <span class="stat-sub" id="kpiGradeSub" style="display:none;">Braunite</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-pill">
-        <span class="stat-label">Daily Target</span>
-        <strong class="stat-val accent-green" id="kpiTargetVal">1,450 TPD</strong>
-        <span class="stat-sub" id="kpiTargetSub" style="display:none;">Dispatch</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-pill">
-        <span class="stat-label">14-Day Risk</span>
-        <strong class="stat-val accent-amber" id="kpiRiskVal">24% Risk</strong>
-        <span class="stat-sub" id="kpiRiskSub" style="display:none;">Moderate</span>
-      </div>
-      <!-- Hidden space KPI elements to maintain JS compatibility -->
-      <span id="kpiSpaceVal" style="display:none;">0.89</span>
-      <span id="kpiSpaceSub" style="display:none;">High</span>
-    </div>
+    <!-- Top Module Switcher Navigation -->
+    <nav class="top-tab-navigation">
+      <button class="tab-btn active" data-tab="tab-space">
+        <i class="fa-solid fa-satellite"></i>
+        <span>Satellite GIS</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-3d">
+        <i class="fa-solid fa-cubes"></i>
+        <span>3D Reserves</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-shortfall">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Fleet &amp; Forecast</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-prescriptive">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>AI Simulator</span>
+      </button>
+    </nav>
 
+    <!-- Header Controls: Mine Selector & Telemetry Badge -->
     <div class="header-controls">
       <div class="mine-select-wrapper">
-        <label for="mineSelector"><i class="fa-solid fa-location-dot"></i> Mine:</label>
+        <label for="mineSelector"><i class="fa-solid fa-location-dot"></i> MINE:</label>
         <select id="mineSelector" class="mine-select">
           <optgroup label="Central India Belt (MP & Maharashtra)">
             <option value="balaghat" selected>Balaghat (Deepest Underground)</option>
@@ -85,305 +76,261 @@
 
       <div class="space-sync-badge">
         <div class="pulse-dot"></div>
-        <span>Satellite Synced</span>
+        <span>Satellite Live</span>
       </div>
     </div>
   </header>
 
-  <!-- Slim Live Constraint Ticker -->
-  <div class="alert-ticker">
-    <div class="ticker-label">
-      <i class="fa-solid fa-circle-info"></i> STATUS
+  <!-- Sub-Header: Streamlined KPI & Live Constraint Bar -->
+  <div class="sub-header-bar">
+    <div class="quick-stats-bar">
+      <div class="stat-pill">
+        <span class="stat-label">Reserves</span>
+        <strong class="stat-val" id="kpiReservesVal">24.8 MT</strong>
+        <span class="stat-sub" id="kpiReservesSub" style="display:none;">Underground</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="stat-label">Grade</span>
+        <strong class="stat-val accent-orange" id="kpiGradeVal">44.5% Mn</strong>
+        <span class="stat-sub" id="kpiGradeSub" style="display:none;">Braunite</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="stat-label">Daily Target</span>
+        <strong class="stat-val accent-green" id="kpiTargetVal">1,450 TPD</strong>
+        <span class="stat-sub" id="kpiTargetSub" style="display:none;">Dispatch</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="stat-label">14-Day Risk</span>
+        <strong class="stat-val accent-amber" id="kpiRiskVal">24% Risk</strong>
+        <span class="stat-sub" id="kpiRiskSub" style="display:none;">Moderate</span>
+      </div>
+      <!-- Hidden space KPI elements for full JS compatibility -->
+      <span id="kpiSpaceVal" style="display:none;">0.89</span>
+      <span id="kpiSpaceSub" style="display:none;">High</span>
     </div>
-    <div class="ticker-content" id="alertTickerContent">
-      Monitoring real-time operational constraints, weather conditions, and satellite passes...
+
+    <!-- Integrated Status Ticker -->
+    <div class="alert-ticker">
+      <div class="ticker-label">
+        <i class="fa-solid fa-circle-info"></i> STATUS
+      </div>
+      <div class="ticker-content" id="alertTickerContent">
+        Monitoring operational constraints, weather conditions, and satellite passes...
+      </div>
     </div>
   </div>
 
-  <!-- Workspace Layout: Left Sidebar + Main Viewport -->
-  <div class="workspace-layout">
-    <!-- Simplified Left Sidebar -->
-    <aside class="left-options-section" id="leftOptionsSection">
+  <!-- Main Workspace Area -->
+  <main class="workspace-layout">
 
-      <!-- Module Navigation Tabs -->
-      <div class="sidebar-block">
-        <div class="block-heading">MODULES</div>
-        <nav class="vertical-tab-navigation">
-          <button class="tab-btn active" data-tab="tab-space">
-            <i class="fa-solid fa-satellite"></i>
-            <span>Satellite GIS</span>
-          </button>
-          <button class="tab-btn" data-tab="tab-3d">
-            <i class="fa-solid fa-cubes"></i>
-            <span>3D Voxel Model</span>
-          </button>
-          <button class="tab-btn" data-tab="tab-shortfall">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Fleet &amp; Forecast</span>
-          </button>
-          <button class="tab-btn" data-tab="tab-prescriptive">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>AI Simulator</span>
-          </button>
-        </nav>
-      </div>
-
-      <!-- Contextual Panel 1: Satellite GIS Options -->
-      <div class="left-context-panel active" id="tab-space-options">
-        <div class="sidebar-block">
-          <div class="block-heading">BASEMAP</div>
-          <div class="segmented-control">
-            <button class="layer-btn active" data-basemap="satellite" title="Satellite Imagery">
-              <i class="fa-solid fa-satellite"></i> Satellite
-            </button>
-            <button class="layer-btn" data-basemap="topo" title="Topographic Elevation">
-              <i class="fa-solid fa-mountain"></i> Topo
-            </button>
-            <button class="layer-btn" data-basemap="osm" title="Streets">
-              <i class="fa-solid fa-road"></i> Streets
-            </button>
-          </div>
-        </div>
-
-        <div class="sidebar-block">
-          <div class="block-heading">REMOTE SENSING LAYERS</div>
-          <div class="layer-toggle-list">
-            <button class="layer-btn active" data-layer="mosi">
-              <i class="fa-solid fa-wave-square"></i>
-              <span>Mn-Oxide Index (MOSI)</span>
-            </button>
-            <button class="layer-btn" data-layer="prospectivity">
-              <i class="fa-solid fa-crosshairs"></i>
-              <span>AI Prospectivity</span>
-            </button>
-            <button class="layer-btn" data-layer="lst">
-              <i class="fa-solid fa-temperature-high"></i>
-              <span>Surface Temperature (LST)</span>
-            </button>
-            <button class="layer-btn" data-layer="ndvi">
-              <i class="fa-solid fa-leaf"></i>
-              <span>Vegetation Stress (NDVI)</span>
-            </button>
-            <button class="layer-btn" data-layer="smi">
-              <i class="fa-solid fa-droplet"></i>
-              <span>Soil Moisture (SMI)</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="sidebar-block">
-          <div class="block-heading">GEOLOGICAL FEATURES</div>
-          <div class="segmented-control">
-            <button class="layer-btn active" id="toggleLineamentsBtn">
-              <i class="fa-solid fa-draw-polygon"></i> Fault Lines
-            </button>
-            <button class="layer-btn active" id="toggleBoreholesBtn">
-              <i class="fa-solid fa-circle-dot"></i> Boreholes (16)
-            </button>
-          </div>
-        </div>
-
-        <!-- Compact Geological Info Card -->
-        <div class="sidebar-block info-card">
-          <div class="block-heading">GEOLOGY SUMMARY</div>
-          <p id="geoStratigraphyText" class="compact-desc">
-            Mansar Formation (Sausar Group). Braunite &amp; pyrolusite horizons in quartz-spessartite schists.
-          </p>
-          <div class="meta-row">
-            <span>Strike &amp; Dip:</span>
-            <strong id="geoStrikeText">N65°E / 68° SE</strong>
-          </div>
-          <div class="meta-row" style="display:none;">
-            <span id="geoMineralsText">Braunite, Pyrolusite</span>
-          </div>
-        </div>
-
-        <!-- Anomaly Targets -->
-        <div class="sidebar-block">
-          <div class="block-heading">DETECTED TARGETS</div>
-          <div class="anomaly-list" id="anomalyListContainer"></div>
-        </div>
-      </div>
-
-      <!-- Contextual Panel 2: 3D Voxel Options -->
-      <div class="left-context-panel" id="tab-3d-options">
-        <div class="sidebar-block">
-          <div class="block-heading">FILTER &amp; CUT-OFF</div>
-          <div class="slider-group">
-            <div class="slider-header">
-              <span>Cut-Off Grade:</span>
-              <strong id="cutoffGradeLabel" class="accent-cyan">35.0% Mn</strong>
-            </div>
-            <input type="range" id="cutoffGradeSlider" min="28" max="46" step="1" value="35">
-          </div>
-
-          <div class="slider-group" style="margin-top: 14px;">
-            <div class="slider-header">
-              <span>Depth Slicing:</span>
-              <strong id="depthSliceLabel" class="accent-purple">-160m</strong>
-            </div>
-            <input type="range" id="depthSliceSlider" min="0" max="160" step="15" value="160">
-          </div>
-
-          <div class="segmented-control" style="margin-top: 14px;">
-            <button class="control-btn" id="btnResetCamera">
-              <i class="fa-solid fa-arrows-rotate"></i> Reset
-            </button>
-            <button class="control-btn" id="btnToggleMeshWire">
-              <i class="fa-solid fa-border-none"></i> Wireframe
-            </button>
-            <button class="control-btn" id="btnAutoRotate">
-              <i class="fa-solid fa-rotate"></i> Rotate
-            </button>
-          </div>
-        </div>
-
-        <!-- UNFC Reserve Summary -->
-        <div class="sidebar-block info-card">
-          <div class="block-heading">RESERVE ESTIMATION</div>
-          <div class="summary-list">
-            <div class="summary-row">
-              <span>Proved (UNFC 111):</span>
-              <strong id="unfcProvedVal" class="accent-green">14.28 MT</strong>
-            </div>
-            <div class="summary-row">
-              <span>Probable (UNFC 122):</span>
-              <strong id="unfcProbableVal" class="accent-cyan">7.45 MT</strong>
-            </div>
-            <div class="summary-row">
-              <span>Inferred (UNFC 333):</span>
-              <strong id="unfcInferredVal" class="accent-amber">3.07 MT</strong>
-            </div>
-            <div class="summary-row total-row">
-              <span>Total Recoverable:</span>
-              <strong id="totalVoxelTonnageVal">24.80 MT</strong>
-            </div>
-            <div class="summary-row sub-row">
-              <span>Avg Grade:</span>
-              <span id="avgVoxelGradeVal" class="accent-purple">44.5% Mn | 0.09% P</span>
+    <!-- ====================================================================
+         MODULE 1: SATELLITE GIS & REMOTE SENSING
+         ==================================================================== -->
+    <section id="tab-space" class="tab-content active">
+      <div class="module-layout-grid">
+        <!-- Left Map Controls & Geology -->
+        <aside class="module-sidebar">
+          <div class="ui-card">
+            <div class="card-title">Basemap</div>
+            <div class="segmented-control">
+              <button class="layer-btn active" data-basemap="satellite" title="Satellite Imagery">
+                <i class="fa-solid fa-satellite"></i> Satellite
+              </button>
+              <button class="layer-btn" data-basemap="topo" title="Topographic Elevation">
+                <i class="fa-solid fa-mountain"></i> Topo
+              </button>
+              <button class="layer-btn" data-basemap="osm" title="Streets">
+                <i class="fa-solid fa-road"></i> Streets
+              </button>
             </div>
           </div>
-        </div>
 
-        <!-- Borehole Cores List -->
-        <div class="sidebar-block">
-          <div class="block-heading">BOREHOLE CORES (16)</div>
-          <div class="borehole-list" id="boreholeListContainer"></div>
-        </div>
-      </div>
-
-      <!-- Contextual Panel 3: Fleet Telemetry -->
-      <div class="left-context-panel" id="tab-shortfall-options">
-        <div class="sidebar-block">
-          <div class="block-heading">FLEET &amp; TELEMETRY</div>
-          <p class="compact-desc">
-            Real-time sensor telemetry from haul trucks, shovels, and pit dewatering stations.
-          </p>
-        </div>
-        <div class="fleet-grid" id="fleetGridContainer"></div>
-      </div>
-
-      <!-- Contextual Panel 4: Prescriptive Simulator Options -->
-      <div class="left-context-panel" id="tab-prescriptive-options">
-        <div class="sidebar-block">
-          <div class="block-heading">SIMULATION PARAMETERS</div>
-          <p class="compact-desc" style="margin-bottom: 12px;">
-            Simulate operational disruptions to auto-generate optimal recovery strategies.
-          </p>
-
-          <div class="slider-group">
-            <div class="slider-header">
-              <span><i class="fa-solid fa-cloud-showers-heavy"></i> Weather / Rain:</span>
-              <strong id="simWeatherLabel" class="accent-cyan">1.0x Normal</strong>
+          <div class="ui-card">
+            <div class="card-title">Remote Sensing Layers</div>
+            <div class="layer-toggle-list">
+              <button class="layer-btn active" data-layer="mosi">
+                <i class="fa-solid fa-wave-square"></i>
+                <span>Mn-Oxide Signature (MOSI)</span>
+              </button>
+              <button class="layer-btn" data-layer="prospectivity">
+                <i class="fa-solid fa-crosshairs"></i>
+                <span>AI Prospectivity</span>
+              </button>
+              <button class="layer-btn" data-layer="lst">
+                <i class="fa-solid fa-temperature-high"></i>
+                <span>Surface Temp (LST)</span>
+              </button>
+              <button class="layer-btn" data-layer="ndvi">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Vegetation Stress (NDVI)</span>
+              </button>
+              <button class="layer-btn" data-layer="smi">
+                <i class="fa-solid fa-droplet"></i>
+                <span>Soil Moisture (SMI)</span>
+              </button>
             </div>
-            <input type="range" id="simWeatherSlider" min="0.5" max="2.5" step="0.1" value="1.0">
           </div>
 
-          <div class="slider-group" style="margin-top: 12px;">
-            <div class="slider-header">
-              <span><i class="fa-solid fa-screwdriver-wrench"></i> Excavator Outages:</span>
-              <strong id="simShovelLabel" class="accent-amber">0 Down</strong>
+          <div class="ui-card">
+            <div class="card-title">Geological Features</div>
+            <div class="segmented-control">
+              <button class="layer-btn active" id="toggleLineamentsBtn">
+                <i class="fa-solid fa-draw-polygon"></i> Fault Lines
+              </button>
+              <button class="layer-btn active" id="toggleBoreholesBtn">
+                <i class="fa-solid fa-circle-dot"></i> Boreholes (16)
+              </button>
             </div>
-            <input type="range" id="simShovelSlider" min="0" max="3" step="1" value="0">
           </div>
 
-          <div class="slider-group" style="margin-top: 12px;">
-            <div class="slider-header">
-              <span><i class="fa-solid fa-bomb"></i> Blasting Delays:</span>
-              <strong id="simBlastingLabel" class="accent-rose">0 Days</strong>
+          <div class="ui-card">
+            <div class="card-title">Stratigraphy Summary</div>
+            <p id="geoStratigraphyText" class="compact-desc">
+              Mansar Formation (Sausar Group). Braunite &amp; pyrolusite horizons in quartz-spessartite schists.
+            </p>
+            <div class="meta-row">
+              <span>Strike &amp; Dip:</span>
+              <strong id="geoStrikeText">N65°E / 68° SE</strong>
             </div>
-            <input type="range" id="simBlastingSlider" min="0" max="4" step="1" value="0">
+            <div class="meta-row" style="display:none;">
+              <span id="geoMineralsText">Braunite, Pyrolusite</span>
+            </div>
           </div>
 
-          <div class="slider-group" style="margin-top: 12px;">
-            <div class="slider-header">
-              <span><i class="fa-solid fa-bullseye"></i> Target Grade:</span>
-              <strong id="simGradeTargetLabel" class="accent-purple">42.5% Mn</strong>
-            </div>
-            <input type="range" id="simGradeTargetSlider" min="36.0" max="46.0" step="0.5" value="42.5">
+          <div class="ui-card">
+            <div class="card-title">Detected Targets</div>
+            <div class="anomaly-list" id="anomalyListContainer"></div>
           </div>
+        </aside>
 
-          <button class="sim-btn" id="btnRunSimulation" style="margin-top: 16px; width: 100%;">
-            <i class="fa-solid fa-play"></i> Run Simulation
-          </button>
-        </div>
-      </div>
-
-    </aside>
-
-    <!-- Main Workspace Viewport -->
-    <main class="workspace-main">
-      <!-- TAB 1: Space Technology & Remote Sensing GIS (Widescreen Satellite Map) -->
-      <section id="tab-space" class="tab-content active" style="padding: 0;">
+        <!-- Right Widescreen GIS Map -->
         <div class="map-container-wrapper">
-          <div id="leafletMap" style="height: 100%;"></div>
+          <div id="leafletMap"></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- TAB 2: 3D Subsurface Voxel Reserves (Widescreen 3D Canvas) -->
-      <section id="tab-3d" class="tab-content" style="padding: 0;">
+    <!-- ====================================================================
+         MODULE 2: 3D SUBSURFACE VOXEL MODEL
+         ==================================================================== -->
+    <section id="tab-3d" class="tab-content">
+      <div class="module-layout-grid">
+        <!-- Left 3D Controls & Reserve Stats -->
+        <aside class="module-sidebar">
+          <div class="ui-card">
+            <div class="card-title">Model Filters</div>
+            <div class="slider-group">
+              <div class="slider-header">
+                <span>Cut-Off Grade:</span>
+                <strong id="cutoffGradeLabel">35.0% Mn</strong>
+              </div>
+              <input type="range" id="cutoffGradeSlider" min="28" max="46" step="1" value="35">
+            </div>
+
+            <div class="slider-group" style="margin-top: 14px;">
+              <div class="slider-header">
+                <span>Depth Slicing:</span>
+                <strong id="depthSliceLabel">-160m</strong>
+              </div>
+              <input type="range" id="depthSliceSlider" min="0" max="160" step="15" value="160">
+            </div>
+
+            <div class="segmented-control" style="margin-top: 14px;">
+              <button class="control-btn" id="btnResetCamera">
+                <i class="fa-solid fa-arrows-rotate"></i> Reset
+              </button>
+              <button class="control-btn" id="btnToggleMeshWire">
+                <i class="fa-solid fa-border-none"></i> Wireframe
+              </button>
+              <button class="control-btn" id="btnAutoRotate">
+                <i class="fa-solid fa-rotate"></i> Rotate
+              </button>
+            </div>
+          </div>
+
+          <div class="ui-card">
+            <div class="card-title">UNFC Reserve Summary</div>
+            <div class="summary-list">
+              <div class="summary-row">
+                <span>Proved (UNFC 111):</span>
+                <strong id="unfcProvedVal" class="accent-orange">14.28 MT</strong>
+              </div>
+              <div class="summary-row">
+                <span>Probable (UNFC 122):</span>
+                <strong id="unfcProbableVal" class="accent-amber">7.45 MT</strong>
+              </div>
+              <div class="summary-row">
+                <span>Inferred (UNFC 333):</span>
+                <strong id="unfcInferredVal">3.07 MT</strong>
+              </div>
+              <div class="summary-row total-row">
+                <span>Total Recoverable:</span>
+                <strong id="totalVoxelTonnageVal" class="accent-orange">24.80 MT</strong>
+              </div>
+              <div class="summary-row sub-row">
+                <span>Avg Grade:</span>
+                <span id="avgVoxelGradeVal">44.5% Mn | 0.09% P</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-card">
+            <div class="card-title">Borehole Drill Cores</div>
+            <div class="borehole-list" id="boreholeListContainer"></div>
+          </div>
+        </aside>
+
+        <!-- Right 3D Viewport with Legend -->
         <div class="subsurface-viewport">
-          <div id="threeCanvasContainer" style="height: 100%;"></div>
-          <!-- Color Ramp Legend -->
+          <div id="threeCanvasContainer"></div>
+          <!-- Black & Orange Theme Color Legend -->
           <div class="subsurface-legend">
             <div class="legend-item">
-              <div class="legend-color" style="background: #a855f7;"></div>
+              <div class="legend-color" style="background: #ff6b00;"></div>
               <span>High Grade (&gt;44% Mn)</span>
             </div>
             <div class="legend-item">
-              <div class="legend-color" style="background: #06b6d4;"></div>
-              <span>Ferro Grade (38-44% Mn)</span>
+              <div class="legend-color" style="background: #f59e0b;"></div>
+              <span>Ferro Grade (38-44%)</span>
             </div>
             <div class="legend-item">
-              <div class="legend-color" style="background: #3b82f6;"></div>
-              <span>Silico-Mn (35-38% Mn)</span>
+              <div class="legend-color" style="background: #c2410c;"></div>
+              <span>Silico-Mn (35-38%)</span>
             </div>
             <div class="legend-item">
-              <div class="legend-color" style="background: #64748b;"></div>
-              <span>Sub-grade (&lt;35% Mn)</span>
+              <div class="legend-color" style="background: #52525b;"></div>
+              <span>Sub-grade (&lt;35%)</span>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- TAB 3: Shortfall Predictor & Fleet Telemetry -->
-      <section id="tab-shortfall" class="tab-content" style="padding: 0;">
-        <div class="shortfall-grid" style="grid-template-columns: 1fr 1fr;">
-          <!-- Main Forecast Chart -->
+    <!-- ====================================================================
+         MODULE 3: SHORTFALL PREDICTOR & FLEET TELEMETRY
+         ==================================================================== -->
+    <section id="tab-shortfall" class="tab-content">
+      <div class="shortfall-container">
+        <!-- Top Charts Grid -->
+        <div class="shortfall-charts-grid">
+          <!-- Main 14-Day Forecast Chart -->
           <div class="chart-card">
             <div class="chart-header">
               <div class="chart-title">
-                <i class="fa-solid fa-chart-area" style="color: var(--accent-cyan);"></i>
+                <i class="fa-solid fa-chart-area" style="color: var(--accent-orange);"></i>
                 <span>14-Day Production Shortfall Prediction &amp; Confidence Envelope</span>
               </div>
-              <span class="badge-tag purple">AI Time-Series Ensemble</span>
+              <span class="badge-tag">AI Time-Series Ensemble</span>
             </div>
             <div class="chart-wrapper">
               <canvas id="forecastChart"></canvas>
             </div>
           </div>
 
-          <!-- Root Cause Constraint Distribution -->
+          <!-- Root Cause Constraint Doughnut Chart -->
           <div class="chart-card">
             <div class="chart-header">
               <div class="chart-title">
@@ -396,10 +343,71 @@
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- TAB 4: Prescriptive Action Center & What-If Sandbox -->
-      <section id="tab-prescriptive" class="tab-content" style="padding: 0;">
+        <!-- Bottom Spacious HEMM Fleet Grid -->
+        <div>
+          <div class="fleet-section-title">
+            <i class="fa-solid fa-truck-monster" style="color: var(--accent-orange);"></i>
+            <span>Heavy Earth Moving Machinery (HEMM) Fleet Condition &amp; Telemetry</span>
+          </div>
+          <div class="fleet-grid" id="fleetGridContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODULE 4: AI SIMULATOR & PRESCRIPTIVE OPTIMIZER
+         ==================================================================== -->
+    <section id="tab-prescriptive" class="tab-content">
+      <div class="prescriptive-grid">
+        <!-- Left: Disruption Simulator -->
+        <div class="simulator-box">
+          <div class="simulator-title">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Disruption Sandbox</span>
+          </div>
+          <p class="compact-desc">
+            Simulate adverse mine conditions to auto-synthesize optimal mitigation protocols and stockpile blending solutions.
+          </p>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span><i class="fa-solid fa-cloud-showers-heavy"></i> Weather Severity:</span>
+              <strong id="simWeatherLabel">1.0x Normal</strong>
+            </div>
+            <input type="range" id="simWeatherSlider" min="0.5" max="2.5" step="0.1" value="1.0">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span><i class="fa-solid fa-screwdriver-wrench"></i> Excavator Outages:</span>
+              <strong id="simShovelLabel">0 Down</strong>
+            </div>
+            <input type="range" id="simShovelSlider" min="0" max="3" step="1" value="0">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span><i class="fa-solid fa-bomb"></i> Blasting Delays:</span>
+              <strong id="simBlastingLabel">0 Days</strong>
+            </div>
+            <input type="range" id="simBlastingSlider" min="0" max="4" step="1" value="0">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span><i class="fa-solid fa-bullseye"></i> Target Blend Grade:</span>
+              <strong id="simGradeTargetLabel">42.5% Mn</strong>
+            </div>
+            <input type="range" id="simGradeTargetSlider" min="36.0" max="46.0" step="0.5" value="42.5">
+          </div>
+
+          <button class="sim-btn" id="btnRunSimulation" style="margin-top: 8px;">
+            <i class="fa-solid fa-microchip"></i> Run AI Prescriptive Engine
+          </button>
+        </div>
+
+        <!-- Right: Prescriptive Action Center -->
         <div class="prescriptive-results">
           <!-- Recovery Banner -->
           <div class="recovery-banner">
@@ -408,39 +416,39 @@
               <div class="recovery-val" id="simRecoveryRateVal">94.8%</div>
             </div>
             <div style="text-align: right;">
-              <div style="font-size: 0.78rem; color: var(--text-secondary);">Production Preserved:</div>
-              <div style="font-size: 1.25rem; font-weight: 700; color: #fff;" id="simProductionPreservedVal">1,375 / 1,450 TPD</div>
-              <div style="font-size: 0.72rem; color: var(--accent-emerald); font-weight: 600;" id="simDeficitRecoveredVal">+490 Tonnes Saved</div>
+              <div style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 2px;">Production Preserved:</div>
+              <div style="font-size: 1.3rem; font-weight: 800; color: #fff; font-family: var(--font-mono);" id="simProductionPreservedVal">1,375 / 1,450 TPD</div>
+              <div style="font-size: 0.75rem; color: var(--accent-orange); font-weight: 700; margin-top: 2px;" id="simDeficitRecoveredVal">+490 Tonnes Preserved</div>
             </div>
           </div>
 
           <!-- Stockpile LP Blending Solution Card -->
-          <div class="sidebar-panel" style="border-color: var(--border-accent);">
-            <div class="panel-title">
+          <div class="ui-card" style="border-color: var(--border-orange);">
+            <div class="card-title">
               <span>Optimal Stockpile Blending Formulation (Linear Programming)</span>
-              <span class="badge-tag purple">Customer Spec Guaranteed</span>
+              <span class="badge-tag">Customer Spec Guaranteed</span>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 14px;">
-              <div style="background: var(--bg-secondary); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
-                <div style="font-size: 0.7rem; color: var(--text-secondary);">High Grade (47.8%)</div>
-                <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-mn);" id="blendHgVal">38%</div>
+              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">High Grade (47.8%)</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-orange); font-family: var(--font-mono);" id="blendHgVal">38%</div>
               </div>
-              <div style="background: var(--bg-secondary); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
-                <div style="font-size: 0.7rem; color: var(--text-secondary);">Ferro ROM (41.5%)</div>
-                <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-cyan);" id="blendFgVal">35%</div>
+              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Ferro ROM (41.5%)</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-amber); font-family: var(--font-mono);" id="blendFgVal">35%</div>
               </div>
-              <div style="background: var(--bg-secondary); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
-                <div style="font-size: 0.7rem; color: var(--text-secondary);">Silico-Mn (35.2%)</div>
-                <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-blue);" id="blendSmVal">19%</div>
+              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Silico-Mn (35.2%)</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #ea580c; font-family: var(--font-mono);" id="blendSmVal">19%</div>
               </div>
-              <div style="background: var(--bg-secondary); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
-                <div style="font-size: 0.7rem; color: var(--text-secondary);">Subgrade (29.5%)</div>
-                <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-muted);" id="blendLgVal">8%</div>
+              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Subgrade (29.5%)</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: var(--text-muted); font-family: var(--font-mono);" id="blendLgVal">8%</div>
               </div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-secondary); padding: 8px 14px; border-radius: var(--radius-sm);">
-              <span>Resulting Blend: <strong id="blendResultMn" style="color: var(--accent-emerald);">42.5% Mn</strong></span>
-              <span>Phosphorus: <strong id="blendResultP" style="color: var(--accent-cyan);">0.108% P (&lt;0.15% limit)</strong></span>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-secondary); padding: 10px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <span>Resulting Blend: <strong id="blendResultMn" style="color: var(--accent-orange);">42.5% Mn</strong></span>
+              <span>Phosphorus: <strong id="blendResultP" style="color: #fff;">0.108% P (&lt;0.15% limit)</strong></span>
               <span>Blend Cost: <strong id="blendResultCost" style="color: #fff;">₹11,620 / Tonne</strong></span>
             </div>
           </div>
@@ -448,15 +456,15 @@
           <!-- Prescriptive Corrective Action Cards -->
           <div class="action-cards-container" id="actionCardsList"></div>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Modal for Borehole / Anomaly Inspection -->
   <div class="modal-overlay" id="detailModal">
     <div class="modal-content">
       <button class="modal-close-btn" id="btnModalClose">&times;</button>
-      <h3 id="modalTitle" style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 12px; color: var(--accent-cyan);">Inspection Detail</h3>
+      <h3 id="modalTitle" style="font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 12px; color: var(--accent-orange);">Inspection Detail</h3>
       <div id="modalBody" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
         <!-- Modal content dynamically injected -->
       </div>
@@ -466,8 +474,8 @@
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Scripts -->
-  <!-- Leaflet JS -->
+  <!-- Third-Party Libraries -->
+  <!-- Leaflet GIS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Three.js & OrbitControls -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

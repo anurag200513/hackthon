@@ -119,32 +119,32 @@ class AppController {
             <div><strong>Inclination / Dip:</strong> ${bh.dip}° (Azimuth ${bh.azimuth}°)</div>
           </div>
 
-          <h4 style="color: var(--accent-cyan); margin-top: 6px;">Chemical Assay Chemistry</h4>
+          <h4 style="color: var(--accent-orange); margin-top: 6px;">Chemical Assay Chemistry</h4>
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center;">
-            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm);">
+            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
               <div style="font-size: 0.7rem; color: var(--text-muted);">Manganese (Mn)</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-mn);">${bh.assays.mn_pct}%</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-orange);">${bh.assays.mn_pct}%</div>
             </div>
-            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm);">
+            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
               <div style="font-size: 0.7rem; color: var(--text-muted);">Iron (Fe)</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan);">${bh.assays.fe_pct}%</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: #fff;">${bh.assays.fe_pct}%</div>
             </div>
-            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm);">
+            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
               <div style="font-size: 0.7rem; color: var(--text-muted);">Silica (SiO₂)</div>
               <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">${bh.assays.sio2_pct}%</div>
             </div>
-            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm);">
+            <div style="background: var(--bg-secondary); padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
               <div style="font-size: 0.7rem; color: var(--text-muted);">Phosphorus (P)</div>
               <div style="font-size: 1.1rem; font-weight: 700; color: ${bh.assays.p_pct > 0.12 ? 'var(--accent-amber)' : 'var(--accent-emerald)'};">${bh.assays.p_pct}%</div>
             </div>
           </div>
 
-          <h4 style="color: var(--accent-cyan); margin-top: 6px;">Core Lithology Stratigraphy</h4>
+          <h4 style="color: var(--accent-orange); margin-top: 6px;">Core Lithology Stratigraphy</h4>
           <div style="display: flex; flex-direction: column; gap: 6px;">
             ${bh.lithology.map(l => `
               <div style="display: flex; justify-content: space-between; font-size: 0.75rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 4px;">
                 <span>${l.from}m - ${l.to}m: <strong>${l.rock}</strong></span>
-                <span style="color: var(--accent-mn-glow);">${l.grade}% Mn</span>
+                <span style="color: var(--accent-orange); font-weight: 600;">${l.grade}% Mn</span>
               </div>
             `).join('')}
           </div>
@@ -161,9 +161,9 @@ class AppController {
       title.innerHTML = `<i class="fa-solid fa-satellite"></i> Space Anomaly: ${anom.id}`;
       body.innerHTML = `
         <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div><strong style="color: var(--accent-cyan); font-size: 1rem;">${anom.name}</strong></div>
+          <div><strong style="color: var(--accent-orange); font-size: 1rem;">${anom.name}</strong></div>
           <div><strong>Spectral Signature:</strong> ${anom.signature}</div>
-          <div><strong>Estimated Ore Grade:</strong> <span style="color: var(--accent-mn-glow); font-weight: 700;">${anom.estimated_grade}</span></div>
+          <div><strong>Estimated Ore Grade:</strong> <span style="color: var(--accent-orange); font-weight: 700;">${anom.estimated_grade}</span></div>
           <div><strong>AI Confidence Level:</strong> <span style="color: var(--accent-emerald); font-weight: 700;">${anom.confidence}%</span></div>
           <div><strong>Recommended Operational Action:</strong> ${anom.status}</div>
           <div style="font-size: 0.75rem; color: var(--text-muted);">Coordinates: Lat ${anom.lat}, Lon ${anom.lon} (Sausar Gondite Formation)</div>
@@ -182,11 +182,11 @@ class AppController {
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <div style="display: flex; justify-content: space-between;">
             <span>Manganese Grade:</span>
-            <strong style="color: var(--accent-mn-glow); font-size: 1.1rem;">${vox.mn}% Mn</strong>
+            <strong style="color: var(--accent-orange); font-size: 1.1rem;">${vox.mn}% Mn</strong>
           </div>
           <div style="display: flex; justify-content: space-between;">
             <span>Category:</span>
-            <strong style="color: var(--accent-cyan);">${vox.category}</strong>
+            <strong style="color: var(--accent-amber);">${vox.category}</strong>
           </div>
           <div style="display: flex; justify-content: space-between;">
             <span>UNFC Classification:</span>
@@ -321,7 +321,7 @@ class AppController {
       <div class="borehole-card" onclick="window.showBoreholeDetail(window.appState.cachedBoreholes.find(b => b.id === '${bh.id}'))">
         <div class="borehole-header">
           <span>${bh.id}</span>
-          <span style="color: var(--accent-mn-glow);">${bh.assays.mn_pct}% Mn</span>
+          <span style="color: var(--accent-orange); font-weight: 700;">${bh.assays.mn_pct}% Mn</span>
         </div>
         <div class="borehole-meta">
           <span>Depth: ${bh.total_depth_m}m (${bh.ore_thickness_m}m Ore)</span>

@@ -143,19 +143,19 @@ class SatelliteMapEngine {
 
   getGridColor(point) {
     if (this.currentLayer === 'mosi') {
-      // Manganese Oxide Signature Index (SWIR/VNIR): Higher is purple/violet
+      // Manganese Oxide Signature Index (SWIR/VNIR): Higher is vibrant orange
       const v = point.mosi;
-      if (v > 0.75) return '#c084fc';
-      if (v > 0.55) return '#a855f7';
-      if (v > 0.35) return '#7c3aed';
-      return '#3b1c6e';
+      if (v > 0.75) return '#ff6b00';
+      if (v > 0.55) return '#f97316';
+      if (v > 0.35) return '#c2410c';
+      return '#431407';
     } else if (this.currentLayer === 'prospectivity') {
-      // AI Prospectivity: High is electric cyan/gold
+      // AI Prospectivity: High is electric orange/gold
       const p = point.prospectivity;
-      if (p > 0.75) return '#10b981';
-      if (p > 0.55) return '#06b6d4';
-      if (p > 0.35) return '#3b82f6';
-      return '#1e293b';
+      if (p > 0.75) return '#ff6b00';
+      if (p > 0.55) return '#f59e0b';
+      if (p > 0.35) return '#ea580c';
+      return '#27272a';
     } else if (this.currentLayer === 'lst') {
       // Land Surface Temperature (°C)
       const t = point.lst;
@@ -178,7 +178,7 @@ class SatelliteMapEngine {
       if (s > 0.25) return '#67e8f9';
       return '#334155';
     }
-    return '#a855f7';
+    return '#ff6b00';
   }
 
   renderGrid() {
@@ -247,8 +247,8 @@ class SatelliteMapEngine {
 
     this.boreholesData.forEach(bh => {
       const mnGrade = bh.assays.mn_pct;
-      // High grade braunite is purple, medium is cyan
-      const markerColor = mnGrade >= 44.0 ? '#a855f7' : (mnGrade >= 38.0 ? '#06b6d4' : '#3b82f6');
+      // High grade braunite is orange, medium is amber, low is neutral zinc
+      const markerColor = mnGrade >= 44.0 ? '#ff6b00' : (mnGrade >= 38.0 ? '#f59e0b' : '#71717a');
 
       const marker = L.circleMarker([bh.lat, bh.lon], {
         radius: 6,
@@ -285,13 +285,13 @@ class SatelliteMapEngine {
       const iconHtml = `
         <div style="
           width: 28px; height: 28px; border-radius: 50%;
-          background: rgba(168, 85, 247, 0.25); border: 2px solid #c084fc;
+          background: rgba(255, 107, 0, 0.25); border: 2px solid #ff6b00;
           display: flex; align-items: center; justify-content: center;
           color: #fff; font-size: 11px; font-weight: 700;
-          box-shadow: 0 0 14px rgba(168, 85, 247, 0.6);
+          box-shadow: 0 0 14px rgba(255, 107, 0, 0.6);
           animation: pulseAnim 2s infinite ease-in-out;
         ">
-          <i class="fa-solid fa-bullseye" style="color: #c084fc;"></i>
+          <i class="fa-solid fa-bullseye" style="color: #ff8c38;"></i>
         </div>
       `;
 
@@ -306,7 +306,7 @@ class SatelliteMapEngine {
 
       marker.bindTooltip(`
         <div style="font-size: 0.75rem; font-family: var(--font-body);">
-          <strong style="color: #c084fc;">🎯 ${anom.id}: ${anom.name}</strong><br/>
+          <strong style="color: #ff8c38;">🎯 ${anom.id}: ${anom.name}</strong><br/>
           <strong>AI Confidence:</strong> ${anom.confidence}%<br/>
           <strong>Est. Grade:</strong> ${anom.estimated_grade}<br/>
           <em>${anom.status}</em>

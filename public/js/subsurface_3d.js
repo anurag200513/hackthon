@@ -33,8 +33,8 @@ class Subsurface3DEngine {
 
     // Scene setup
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x060910);
-    this.scene.fog = new THREE.FogExp2(0x060910, 0.0018);
+    this.scene.background = new THREE.Color(0x09090b);
+    this.scene.fog = new THREE.FogExp2(0x09090b, 0.0018);
 
     // Camera setup
     this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 3000);
@@ -52,7 +52,7 @@ class Subsurface3DEngine {
       this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
       this.controls.enableDamping = true;
       this.controls.dampingFactor = 0.05;
-      this.controls.maxPolarAngle = Math.PI / 2 + 0.35; // Allow looking slightly upward from underneath
+      this.controls.maxPolarAngle = Math.PI / 2 + 0.35;
       this.controls.target.set(0, -60, 0);
     }
 
@@ -64,12 +64,12 @@ class Subsurface3DEngine {
     dirLight1.position.set(200, 400, 200);
     this.scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x7c3aed, 0.6); // Purple manganese accent backlight
+    const dirLight2 = new THREE.DirectionalLight(0xff6b00, 0.55); // Warm orange accent backlight
     dirLight2.position.set(-200, -200, -200);
     this.scene.add(dirLight2);
 
     // Grid Floor (ground surface)
-    this.gridHelper = new THREE.GridHelper(600, 24, 0x06b6d4, 0x1e293b);
+    this.gridHelper = new THREE.GridHelper(600, 24, 0xff6b00, 0x27272a);
     this.gridHelper.position.y = 0;
     this.scene.add(this.gridHelper);
 
@@ -94,7 +94,7 @@ class Subsurface3DEngine {
     if (cutoffSlider) {
       cutoffSlider.addEventListener('input', (e) => {
         this.cutoffGrade = parseFloat(e.target.value);
-        if (cutoffLabel) cutoffLabel.textContent = `${this.cutoffGrade.toFixed(1)}%`;
+        if (cutoffLabel) cutoffLabel.textContent = `${this.cutoffGrade.toFixed(1)}% Mn`;
         this.filterVoxels();
       });
     }
@@ -105,7 +105,7 @@ class Subsurface3DEngine {
     if (depthSlider) {
       depthSlider.addEventListener('input', (e) => {
         this.maxDepthSlice = parseInt(e.target.value);
-        if (depthLabel) depthLabel.textContent = `-${this.maxDepthSlice}m Depth`;
+        if (depthLabel) depthLabel.textContent = `-${this.maxDepthSlice}m`;
         this.filterVoxels();
       });
     }
@@ -161,10 +161,16 @@ class Subsurface3DEngine {
       const isVisible = vox.mn >= this.cutoffGrade && Math.abs(vox.z) <= this.maxDepthSlice;
       if (!isVisible) return;
 
+      let col = vox.color;
+      if (vox.mn >= 44.0) col = '#ff6b00';
+      else if (vox.mn >= 38.0) col = '#f59e0b';
+      else if (vox.mn >= 35.0) col = '#c2410c';
+      else col = '#52525b';
+
       const mat = new THREE.MeshLambertMaterial({
-        color: new THREE.Color(vox.color),
+        color: new THREE.Color(col),
         transparent: true,
-        opacity: vox.mn >= 44.0 ? 0.92 : 0.78
+        opacity: vox.mn >= 44.0 ? 0.95 : 0.82
       });
 
       const mesh = new THREE.Mesh(boxGeo, mat);
@@ -188,7 +194,7 @@ class Subsurface3DEngine {
       // Create drill cylinder dipping at 70 degrees
       const depth = bh.total_depth_m * 0.45; // scaled
       const cylGeo = new THREE.CylinderGeometry(2, 2, depth, 12);
-      const cylMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: false });
+      const cylMat = new THREE.MeshBasicMaterial({ color: 0xff6b00, wireframe: false });
 
       const cyl = new THREE.Mesh(cylGeo, cylMat);
 
@@ -201,7 +207,7 @@ class Subsurface3DEngine {
 
       // Collar marker ring on surface
       const ringGeo = new THREE.RingGeometry(3, 7, 16);
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0xc084fc, side: THREE.DoubleSide });
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, side: THREE.DoubleSide });
       const ring = new THREE.Mesh(ringGeo, ringMat);
       ring.position.set(offsetX, 1, offsetZ);
       ring.rotation.x = Math.PI / 2;

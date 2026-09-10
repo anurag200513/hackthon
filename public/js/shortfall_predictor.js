@@ -41,7 +41,7 @@ class ShortfallPredictorEngine {
           {
             label: 'Daily Target (TPD)',
             data: targets,
-            borderColor: '#f59e0b',
+            borderColor: '#a1a1aa',
             borderWidth: 2,
             borderDash: [5, 5],
             pointRadius: 0,
@@ -51,10 +51,12 @@ class ShortfallPredictorEngine {
           {
             label: 'AI Forecast Output',
             data: predicted,
-            borderColor: '#06b6d4',
-            backgroundColor: 'rgba(6, 182, 212, 0.15)',
+            borderColor: '#ff6b00',
+            backgroundColor: 'rgba(255, 107, 0, 0.15)',
             borderWidth: 3,
-            pointBackgroundColor: '#06b6d4',
+            pointBackgroundColor: '#ff6b00',
+            pointBorderColor: '#09090b',
+            pointBorderWidth: 1.5,
             pointHoverRadius: 6,
             tension: 0.35,
             fill: false
@@ -63,7 +65,7 @@ class ShortfallPredictorEngine {
             label: 'Upper Confidence (90%)',
             data: upper,
             borderColor: 'transparent',
-            backgroundColor: 'rgba(168, 85, 247, 0.12)',
+            backgroundColor: 'rgba(255, 107, 0, 0.12)',
             fill: '+1', // fill to lower
             pointRadius: 0,
             tension: 0.35
@@ -89,15 +91,15 @@ class ShortfallPredictorEngine {
         plugins: {
           legend: {
             labels: {
-              color: '#94a3b8',
+              color: '#a1a1aa',
               font: { family: 'Inter', size: 11 }
             }
           },
           tooltip: {
-            backgroundColor: 'rgba(15, 23, 38, 0.95)',
+            backgroundColor: 'rgba(18, 18, 21, 0.95)',
             titleFont: { family: 'Outfit', weight: 'bold' },
             bodyFont: { family: 'Inter' },
-            borderColor: 'rgba(139, 92, 246, 0.4)',
+            borderColor: 'rgba(255, 107, 0, 0.4)',
             borderWidth: 1,
             callbacks: {
               afterBody: (context) => {
@@ -111,15 +113,15 @@ class ShortfallPredictorEngine {
         scales: {
           x: {
             grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { color: '#64748b', font: { family: 'Inter', size: 11 } }
+            ticks: { color: '#71717a', font: { family: 'Inter', size: 11 } }
           },
           y: {
             grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { color: '#64748b', font: { family: 'Inter', size: 11 } },
+            ticks: { color: '#71717a', font: { family: 'Inter', size: 11 } },
             title: {
               display: true,
               text: 'Production (Tonnes / Day)',
-              color: '#94a3b8',
+              color: '#a1a1aa',
               font: { family: 'Inter', size: 12 }
             }
           }
@@ -149,14 +151,14 @@ class ShortfallPredictorEngine {
         datasets: [{
           data: [38, 26, 16, 12, 8],
           backgroundColor: [
-            '#06b6d4', // Cyan
-            '#f43f5e', // Rose
-            '#f59e0b', // Amber
-            '#a855f7', // Purple
-            '#3b82f6'  // Blue
+            '#ff6b00', // Vivid Safety Orange
+            '#f59e0b', // Warm Amber
+            '#ea580c', // Deep Orange
+            '#c2410c', // Rust Tangerine
+            '#52525b'  // Dark Zinc
           ],
-          borderWidth: 1,
-          borderColor: '#0f1726'
+          borderWidth: 2,
+          borderColor: '#121215'
         }]
       },
       options: {
