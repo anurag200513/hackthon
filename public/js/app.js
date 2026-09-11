@@ -1,5 +1,5 @@
 /**
- * MOIL-PRAGYA: Core Application Controller
+ * ORE FINDER-AI: Core Application Controller
  * Manages state, API communication, tab transitions, mine switching,
  * alert tickers, modals, and cross-module synchronization.
  */
@@ -41,12 +41,14 @@ class AppController {
         const contextPanel = document.getElementById(targetId + '-options');
         if (contextPanel) contextPanel.classList.add('active');
 
-        // Trigger resize on dynamic canvases
-        if (targetId === 'tab-space' && window.satelliteMap) {
-          window.satelliteMap.invalidateSize();
-        } else if (targetId === 'tab-3d' && window.subsurface3D) {
-          window.subsurface3D.onResize();
-        }
+        // Trigger resize on dynamic canvases after DOM paint
+        setTimeout(() => {
+          if (targetId === 'tab-space' && window.satelliteMap) {
+            window.satelliteMap.invalidateSize();
+          } else if (targetId === 'tab-3d' && window.subsurface3D) {
+            window.subsurface3D.onResize();
+          }
+        }, 60);
       });
     });
   }

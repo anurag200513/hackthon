@@ -1,6 +1,6 @@
 """
-MOIL-PRAGYA: Backend Server & REST API
-High-performance Python server powering Space & AI-guided Manganese Reserve
+ORE FINDER-AI: Backend Server & REST API
+High-performance Python server powering Space & AI-guided Mineral Reserve
 Exploration, Sub-surface Voxel Modeling, Shortfall Prediction, and Prescriptive Ops.
 """
 
@@ -93,7 +93,7 @@ class MoilRequestHandler(BaseHTTPRequestHandler):
             return
 
         elif path == "/api/health":
-            self.send_json({"status": "healthy", "service": "MOIL-PRAGYA Engine"})
+            self.send_json({"status": "healthy", "service": "ORE FINDER-AI Engine"})
             return
 
         # Serve static assets from public/
@@ -194,11 +194,11 @@ if __name__ == "__main__":
     server_address = ("", PORT)
     httpd = HTTPServer(server_address, MoilRequestHandler)
     print(f"============================================================")
-    print(f">> MOIL-PRAGYA Server listening on http://localhost:{PORT}")
+    print(f">> ORE FINDER-AI Server listening on http://localhost:{PORT}")
     print(f">> Space Exploration | 3D Voxel Reserves | Shortfall Predictor")
     print(f"============================================================")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nStopping MOIL-PRAGYA server...")
+        print("\nStopping ORE FINDER-AI server...")
         httpd.server_close()

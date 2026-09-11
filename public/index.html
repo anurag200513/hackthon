@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOIL-PRAGYA | AI & Space Remote Sensing Mining Intelligence</title>
+  <title>ORE FINDER-AI | Space Remote Sensing &amp; Subsurface Mining Intelligence</title>
   <meta name="description" content="Executive AI/ML and Space Remote Sensing Platform for Manganese Reserve Identification and Production Shortfall Mitigation for MOIL Limited.">
 
   <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
@@ -29,7 +29,7 @@
         <i class="fa-solid fa-bolt"></i>
       </div>
       <div>
-        <h1 class="brand-title">MOIL<span>PRAGYA</span></h1>
+        <h1 class="brand-title">ORE<span>FINDER-AI</span></h1>
         <div class="brand-subtitle">Reserve Exploration &amp; Shortfall Mitigation</div>
       </div>
     </div>
@@ -428,28 +428,28 @@
               <span>Optimal Stockpile Blending Formulation (Linear Programming)</span>
               <span class="badge-tag">Customer Spec Guaranteed</span>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 14px;">
-              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
-                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">High Grade (47.8%)</div>
-                <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-orange); font-family: var(--font-mono);" id="blendHgVal">38%</div>
+            <div class="blend-grid">
+              <div class="blend-item">
+                <div class="blend-item-title">High Grade (47.8%)</div>
+                <div class="blend-item-val" id="blendHgVal">38%</div>
               </div>
-              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
-                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Ferro ROM (41.5%)</div>
-                <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-amber); font-family: var(--font-mono);" id="blendFgVal">35%</div>
+              <div class="blend-item">
+                <div class="blend-item-title">Ferro ROM (41.5%)</div>
+                <div class="blend-item-val val-amber" id="blendFgVal">35%</div>
               </div>
-              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
-                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Silico-Mn (35.2%)</div>
-                <div style="font-size: 1.3rem; font-weight: 800; color: #ea580c; font-family: var(--font-mono);" id="blendSmVal">19%</div>
+              <div class="blend-item">
+                <div class="blend-item-title">Silico-Mn (35.2%)</div>
+                <div class="blend-item-val val-orange" id="blendSmVal">19%</div>
               </div>
-              <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid var(--border-subtle);">
-                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Subgrade (29.5%)</div>
-                <div style="font-size: 1.3rem; font-weight: 800; color: var(--text-muted); font-family: var(--font-mono);" id="blendLgVal">8%</div>
+              <div class="blend-item">
+                <div class="blend-item-title">Subgrade (29.5%)</div>
+                <div class="blend-item-val val-muted" id="blendLgVal">8%</div>
               </div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-secondary); padding: 10px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-              <span>Resulting Blend: <strong id="blendResultMn" style="color: var(--accent-orange);">42.5% Mn</strong></span>
-              <span>Phosphorus: <strong id="blendResultP" style="color: #fff;">0.108% P (&lt;0.15% limit)</strong></span>
-              <span>Blend Cost: <strong id="blendResultCost" style="color: #fff;">₹11,620 / Tonne</strong></span>
+            <div class="blend-summary-bar">
+              <div class="blend-metric">Resulting Blend: <strong id="blendResultMn">42.5% Mn</strong></div>
+              <div class="blend-metric">Phosphorus: <strong id="blendResultP">0.108% P (&lt;0.15% limit)</strong></div>
+              <div class="blend-metric">Blend Cost: <strong id="blendResultCost">₹11,620 / Tonne</strong></div>
             </div>
           </div>
 

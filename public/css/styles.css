@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MOIL-PRAGYA: Executive Black & Orange Industrial Intelligence System
+   ORE FINDER-AI: Executive Black & Orange Industrial Intelligence System
    Theme: Pure Deep Black, Industrial Safety Orange (#ff6b00), Warm Amber (#f59e0b)
    Design: Ultra-clean, simplified, high-contrast cyber-geological interface
    ========================================================================== */
@@ -1198,12 +1198,77 @@ input[type="range"] {
   to { opacity: 1; transform: translateX(0); }
 }
 
+/* Stockpile Blending LP Cards */
+.blend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.blend-item {
+  background: var(--bg-secondary);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  border: 1px solid var(--border-subtle);
+}
+
+.blend-item-title {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.blend-item-val {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent-orange);
+  font-family: var(--font-mono);
+}
+
+.blend-item-val.val-amber { color: var(--accent-amber); }
+.blend-item-val.val-orange { color: #ea580c; }
+.blend-item-val.val-muted { color: var(--text-muted); }
+
+.blend-summary-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  gap: 10px;
+}
+
+.blend-metric {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.blend-metric strong {
+  color: #fff;
+}
+
+.blend-metric strong#blendResultMn {
+  color: var(--accent-orange);
+}
+
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN & MOBILE PHONE OPTIMIZATION
    ========================================================================== */
+
+/* 1. Large Tablets & Medium Screens */
 @media (max-width: 1100px) {
   .top-nav {
     flex-wrap: wrap;
+    padding: 10px 18px;
   }
   .module-layout-grid,
   .shortfall-charts-grid,
@@ -1212,6 +1277,366 @@ input[type="range"] {
   }
   .map-container-wrapper,
   .subsurface-viewport {
-    height: 520px;
+    height: 480px;
   }
 }
+
+/* 2. Tablets & Mobile Landscape / Standard Mobile Viewports */
+@media (max-width: 768px) {
+  /* Workspace spacing */
+  .workspace-layout {
+    padding: 10px 12px 24px 12px;
+    min-height: auto;
+  }
+
+  /* Header & Navigation */
+  .top-nav {
+    padding: 10px 12px;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+  }
+
+  .brand-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .brand-title {
+    font-size: 1.15rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.65rem;
+  }
+
+  /* Horizontally Scrollable Module Navigation Tabs (Native App Feel) */
+  .top-tab-navigation {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    padding: 3px;
+    gap: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  .top-tab-navigation::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Header Controls (Mine Selector & Live Sync) */
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .mine-select-wrapper {
+    flex: 1;
+    min-width: 0;
+    padding: 6px 10px;
+  }
+
+  .mine-select {
+    width: 100%;
+    font-size: 0.78rem;
+    text-overflow: ellipsis;
+  }
+
+  .space-sync-badge {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  /* Sub-header Bar & KPIs: Clean 2x2 Grid */
+  .sub-header-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .quick-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .stat-pill {
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .stat-label {
+    font-size: 0.66rem;
+  }
+
+  .stat-val {
+    font-size: 0.82rem;
+  }
+
+  .alert-ticker {
+    max-width: 100%;
+    font-size: 0.72rem;
+  }
+
+  .ticker-content {
+    font-size: 0.72rem;
+  }
+
+  /* Module 1: Satellite GIS - Map on Top on Mobile */
+  .module-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .map-container-wrapper {
+    order: -1;
+    height: 380px;
+    min-height: 320px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Module 2: 3D Subsurface - Canvas on Top on Mobile */
+  .subsurface-viewport {
+    order: -1;
+    height: 380px;
+    min-height: 320px;
+    border-radius: var(--radius-sm);
+    position: relative;
+  }
+
+  .subsurface-legend {
+    position: static;
+    margin: 8px 0 0 0;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.68rem;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    box-sizing: border-box;
+  }
+
+  /* Touch-friendly controls & buttons */
+  .ui-card {
+    padding: 12px;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-title {
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+  }
+
+  .segmented-control .layer-btn,
+  .segmented-control .control-btn {
+    padding: 8px 6px;
+    font-size: 0.72rem;
+    min-height: 38px;
+  }
+
+  .layer-toggle-list .layer-btn {
+    padding: 9px 12px;
+    font-size: 0.76rem;
+    min-height: 40px;
+  }
+
+  input[type="range"] {
+    height: 8px;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent-orange);
+    box-shadow: 0 0 10px rgba(255, 107, 0, 0.6);
+  }
+
+  /* Module 3: Fleet & Charts */
+  .chart-card {
+    padding: 14px 12px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .chart-title {
+    font-size: 0.88rem;
+  }
+
+  .chart-wrapper {
+    height: 260px;
+  }
+
+  .fleet-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .fleet-card {
+    padding: 12px;
+  }
+
+  /* Module 4: Prescriptive Simulator */
+  .simulator-box {
+    padding: 16px 12px;
+    gap: 12px;
+  }
+
+  .sim-btn {
+    width: 100%;
+    padding: 13px;
+    font-size: 0.88rem;
+    min-height: 44px;
+  }
+
+  .recovery-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .recovery-banner > div:last-child {
+    text-align: left !important;
+  }
+
+  .recovery-val {
+    font-size: 1.7rem;
+  }
+
+  .blend-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .blend-item {
+    padding: 10px 8px;
+  }
+
+  .blend-item-title {
+    font-size: 0.64rem;
+  }
+
+  .blend-item-val {
+    font-size: 1.15rem;
+  }
+
+  .blend-summary-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+
+  .blend-metric {
+    font-size: 0.76rem;
+  }
+
+  .action-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .action-btn-trigger {
+    width: 100%;
+    text-align: center;
+    padding: 10px 14px;
+    min-height: 40px;
+  }
+
+  /* Modal & Toast on Mobile */
+  .modal-content {
+    width: 94%;
+    max-width: 440px;
+    padding: 18px 14px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .toast-container {
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+  }
+
+  .toast {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+  }
+}
+
+/* 3. Small Mobile Phones (<= 440px) */
+@media (max-width: 440px) {
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .tab-btn {
+    padding: 7px 11px;
+    font-size: 0.74rem;
+  }
+
+  .tab-btn i {
+    font-size: 0.8rem;
+  }
+
+  .map-container-wrapper,
+  .subsurface-viewport {
+    height: 330px;
+    min-height: 280px;
+  }
+
+  .chart-wrapper {
+    height: 220px;
+  }
+
+  .blend-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .blend-item-val {
+    font-size: 1.05rem;
+  }
+}
+

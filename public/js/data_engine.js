@@ -1,5 +1,5 @@
 /**
- * MOIL-PRAGYA Embedded Data Engine & Intelligent API Client
+ * ORE FINDER-AI Embedded Data Engine & Intelligent API Client
  * Provides 100% resilient data access for all 8 MOIL mines:
  * Automatically connects to backend at http://localhost:8085 when available,
  * and seamlessly falls back to precomputed high-fidelity geological models
@@ -335,7 +335,7 @@ window.apiClient = {
       return { status: 'success', data: mineData ? mineData.shortfall : null };
     }
     if (endpoint === '/health') {
-      return { status: 'healthy', service: 'MOIL-PRAGYA Engine (In-Browser Fallback)' };
+      return { status: 'healthy', service: 'ORE FINDER-AI Engine (In-Browser Fallback)' };
     }
     throw new Error('Endpoint not supported in fallback: ' + path);
   },
