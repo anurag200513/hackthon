@@ -19,6 +19,14 @@
 
   <!-- Application Styles (Black & Orange Theme) -->
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Authentication & Route Protection -->
+  <script src="js/auth.js"></script>
+  <script>
+    if (!window.AuthService || !window.AuthService.isAuthenticated()) {
+      window.location.replace('login.html');
+    }
+  </script>
 </head>
 <body>
 
@@ -78,6 +86,21 @@
         <div class="pulse-dot"></div>
         <span>Satellite Live</span>
       </div>
+
+      <!-- Active User Profile Chip -->
+      <div class="user-header-chip" id="userHeaderChip" title="Active Mining Authority Session">
+        <i class="fa-solid fa-user-shield"></i>
+        <div class="user-header-text">
+          <span class="user-header-name" id="userHeaderName">Officer</span>
+          <span class="user-header-role" id="userHeaderRole">Authority</span>
+        </div>
+      </div>
+
+      <!-- Sign Out Button -->
+      <button type="button" class="btn-sign-out" id="btnSignOut" title="Sign out of ORE FINDER-AI">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Sign Out</span>
+      </button>
     </div>
   </header>
 

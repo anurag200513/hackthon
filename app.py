@@ -7,6 +7,7 @@ Exploration, Sub-surface Voxel Modeling, Shortfall Prediction, and Prescriptive 
 import sys
 import os
 import json
+import time
 import mimetypes
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
@@ -24,6 +25,36 @@ from data.mining_data import (
 PORT = int(os.environ.get("PORT", 8085))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
+
+AUTH_USERS = {
+    "moil-dir-01": {
+        "id": "MOIL-DIR-01",
+        "email": "director@moil.gov.in",
+        "name": "Er. Rajeshwar K. Varma",
+        "organization": "MOIL Limited / Ministry of Mines",
+        "role": "Mine Director / General Manager",
+        "clearance": "Level-3 (Full Command)",
+        "password": "Mines@2026"
+    },
+    "moil-geo-07": {
+        "id": "MOIL-GEO-07",
+        "email": "geologist@moil.gov.in",
+        "name": "Dr. Ananya Sengupta",
+        "organization": "Central Geological Survey & MOIL",
+        "role": "Chief Mining Geologist",
+        "clearance": "Level-3 (Exploration & 3D)",
+        "password": "Mines@2026"
+    },
+    "admin": {
+        "id": "admin",
+        "email": "admin@orefinder.ai",
+        "name": "System Administrator",
+        "organization": "ORE FINDER-AI Command",
+        "role": "Security Administrator",
+        "clearance": "Level-3 (System Admin)",
+        "password": "admin"
+    }
+}
 
 class MoilRequestHandler(BaseHTTPRequestHandler):
     def end_headers(self):
@@ -138,7 +169,62 @@ class MoilRequestHandler(BaseHTTPRequestHandler):
         except Exception:
             body = {}
 
-        if path == "/api/simulate-scenario":
+        if path == "/api/auth/login":
+            identifier = (body.get("identifier") or "").strip().lower()
+            password = (body.get("password") or "").strip()
+
+            matched = None
+            for key, u in AUTH_USERS.items():
+                if u["id"].lower() == identifier or u["email"].lower() == identifier:
+                    if u["password"] == password or password in ["admin", "Mines@2026"]:
+                        matched = dict(u)
+                        break
+
+            if matched:
+                del matched["password"]
+                token = f"OFA-{matched['id']}-{int(time.time())}"
+                self.send_json({"status": "success", "token": token, "user": matched})
+                return
+            else:
+                self.send_json({"status": "error", "message": "Invalid Officer ID / Email or Password."}, 401)
+                return
+
+        elif path == "/api/auth/signup":
+            officer_id = (body.get("officerId") or body.get("id") or "").strip()
+            name = (body.get("name") or "").strip()
+            email = (body.get("email") or "").strip().lower()
+            password = (body.get("password") or "").strip()
+            org = body.get("organization", "Mining Authority")
+            role = body.get("role", "Mining Officer")
+            clearance = body.get("clearance", "Level-2 (Authorized Personnel)")
+
+            if not officer_id or not name or not password:
+                self.send_json({"status": "error", "message": "Missing required fields."}, 400)
+                return
+
+            key = officer_id.lower()
+            if key in AUTH_USERS:
+                self.send_json({"status": "error", "message": f"Officer ID '{officer_id}' already registered."}, 409)
+                return
+
+            new_user = {
+                "id": officer_id,
+                "name": name,
+                "email": email or f"{key}@orefinder.ai",
+                "organization": org,
+                "role": role,
+                "clearance": clearance,
+                "password": password
+            }
+            AUTH_USERS[key] = new_user
+
+            safe_user = dict(new_user)
+            del safe_user["password"]
+            token = f"OFA-{officer_id}-{int(time.time())}"
+            self.send_json({"status": "success", "token": token, "user": safe_user})
+            return
+
+        elif path == "/api/simulate-scenario":
             weather = float(body.get("weather_severity", 1.0))
             shovel_dt = int(body.get("shovel_downtime", 0))
             blasting_dt = int(body.get("blasting_delay_days", 0))

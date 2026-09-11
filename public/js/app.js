@@ -15,6 +15,7 @@ class AppController {
   }
 
   async init() {
+    this.initUserProfile();
     this.bindTabNavigation();
     this.bindMineSelector();
     this.bindModal();
@@ -22,6 +23,25 @@ class AppController {
 
     // Load initial mine data
     await this.loadMineData(this.activeMineId);
+  }
+
+  initUserProfile() {
+    const user = window.AuthService ? window.AuthService.getCurrentUser() : null;
+    if (user) {
+      const nameEl = document.getElementById('userHeaderName');
+      const roleEl = document.getElementById('userHeaderRole');
+      if (nameEl) nameEl.textContent = user.name.split(' ')[0] + ' ' + (user.name.split(' ')[1] || '');
+      if (roleEl) roleEl.textContent = user.id;
+    }
+
+    const btnSignOut = document.getElementById('btnSignOut');
+    if (btnSignOut && window.AuthService) {
+      btnSignOut.addEventListener('click', () => {
+        if (confirm('Sign out of ORE FINDER-AI session?')) {
+          window.AuthService.logout();
+        }
+      });
+    }
   }
 
   bindTabNavigation() {
