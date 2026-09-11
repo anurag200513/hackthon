@@ -19,14 +19,6 @@
 
   <!-- Application Styles (Black & Orange Theme) -->
   <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Mining Authority Auth Protection (Immediate Session Guard) -->
-  <script src="js/auth.js"></script>
-  <script>
-    if (!window.AuthService || !window.AuthService.isAuthenticated()) {
-      window.location.replace('login.html');
-    }
-  </script>
 </head>
 <body>
 
@@ -86,20 +78,6 @@
         <div class="pulse-dot"></div>
         <span>Satellite Live</span>
       </div>
-
-      <!-- Mining Authority Officer Identity & Sign-Out -->
-      <div class="officer-profile-badge" id="officerProfileBadge" title="Mining Authority Verified Clearance">
-        <i class="fa-solid fa-user-shield"></i>
-        <div class="officer-info">
-          <span class="officer-name" id="headerOfficerName">Mining Officer</span>
-          <span class="officer-clearance" id="headerOfficerRole">Level-3</span>
-        </div>
-      </div>
-
-      <button id="btnSignOut" class="btn-sign-out" title="Sign out of Mining Authority session">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        <span>Sign Out</span>
-      </button>
     </div>
   </header>
 

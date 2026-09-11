@@ -5,15 +5,10 @@
   <meta http-equiv="refresh" content="0; url=public/index.html">
   <title>ORE FINDER-AI Platform</title>
   <script>
-    var token = sessionStorage.getItem('orefinder_auth_token') || localStorage.getItem('orefinder_auth_token');
-    if (token) {
-      window.location.replace("public/index.html");
-    } else {
-      window.location.replace("public/login.html");
-    }
+    window.location.replace("public/index.html");
   </script>
 </head>
 <body style="background: #090d14; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
-  <p>Authenticating Mining Authority Clearance... <a href="public/login.html" style="color: #ff6b00;">Click here if not redirected</a>.</p>
+  <p>Loading ORE FINDER-AI Platform... <a href="public/index.html" style="color: #ff6b00;">Click here if not redirected</a>.</p>
 </body>
 </html>

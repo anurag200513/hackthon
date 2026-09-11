@@ -7,7 +7,6 @@ Exploration, Sub-surface Voxel Modeling, Shortfall Prediction, and Prescriptive 
 import sys
 import os
 import json
-import time
 import mimetypes
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
@@ -139,71 +138,7 @@ class MoilRequestHandler(BaseHTTPRequestHandler):
         except Exception:
             body = {}
 
-        if path == "/api/auth/login":
-            officer_id = (body.get("officerId") or "").strip().upper()
-            password = body.get("password", "")
-            role = body.get("role", "director")
-
-            officers = {
-                "MOIL-DIR-01": {
-                    "id": "MOIL-DIR-01",
-                    "name": "Er. Rajeshwar K. Varma",
-                    "designation": "Director of Mines / General Manager",
-                    "organization": "MOIL Limited / Ministry of Mines",
-                    "role": "director",
-                    "clearanceLevel": "Level-3 (Full Command)",
-                    "badgeColor": "#ff6b00"
-                },
-                "MOIL-GEO-07": {
-                    "id": "MOIL-GEO-07",
-                    "name": "Dr. Ananya Sengupta",
-                    "designation": "Chief Mining Geologist & Remote Sensing Lead",
-                    "organization": "Central Geological Survey & MOIL",
-                    "role": "geologist",
-                    "clearanceLevel": "Level-3 (Exploration & 3D)",
-                    "badgeColor": "#f59e0b"
-                },
-                "DGMS-INSP-04": {
-                    "id": "DGMS-INSP-04",
-                    "name": "Vikramaditya Rao",
-                    "designation": "Dy. Director of Mines Safety",
-                    "organization": "Directorate General of Mines Safety (DGMS)",
-                    "role": "inspector",
-                    "clearanceLevel": "Level-2 (Safety & Telemetry)",
-                    "badgeColor": "#22c55e"
-                }
-            }
-
-            if officer_id in officers:
-                if password in ["Mines@2026", "admin", "moil123"]:
-                    officer_data = dict(officers[officer_id])
-                    if role:
-                        officer_data["role"] = role
-                    token = f"MTA-{officer_id}-{int(time.time())}"
-                    self.send_json({"status": "success", "token": token, "officer": officer_data})
-                    return
-                else:
-                    self.send_json({"status": "error", "message": "Invalid Mining Authority Passcode."}, 401)
-                    return
-
-            if (officer_id.startswith("MOIL-") or officer_id.startswith("DGMS-") or officer_id.startswith("MINES-")) and len(password) >= 6:
-                officer_data = {
-                    "id": officer_id,
-                    "name": f"Authorized Officer {officer_id}",
-                    "designation": "Mine General Manager" if role == "director" else ("Senior Geologist" if role == "geologist" else "Safety Inspector"),
-                    "organization": "Directorate General of Mines Safety" if officer_id.startswith("DGMS") else "MOIL Mining Authority",
-                    "role": role,
-                    "clearanceLevel": "Level-2 (Authorized Field Personnel)",
-                    "badgeColor": "#ff6b00"
-                }
-                token = f"MTA-{officer_id}-{int(time.time())}"
-                self.send_json({"status": "success", "token": token, "officer": officer_data})
-                return
-
-            self.send_json({"status": "error", "message": "Unrecognized Officer ID. Access is strictly restricted to Mining Authority personnel."}, 401)
-            return
-
-        elif path == "/api/simulate-scenario":
+        if path == "/api/simulate-scenario":
             weather = float(body.get("weather_severity", 1.0))
             shovel_dt = int(body.get("shovel_downtime", 0))
             blasting_dt = int(body.get("blasting_delay_days", 0))
