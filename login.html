@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORE FINDER-AI | Authentication Portal</title>
+  <meta name="description" content="Official Mining Authority Authentication &amp; User Registration Gateway for ORE FINDER-AI Intelligence Platform.">
+
+  <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Application Styles (Black & Orange Theme) -->
+  <link rel="stylesheet" href="css/styles.css?v=2.2">
+
+  <!-- Auth Service -->
+  <script src="js/auth.js?v=2.2"></script>
+  <script>
+    // If user is already authenticated, redirect straight to dashboard
+    if (window.AuthService && window.AuthService.isAuthenticated()) {
+      window.location.replace('index.html');
+    }
+  </script>
+</head>
+<body class="auth-page-body">
+
+  <!-- Ambient Glow Effects -->
+  <div class="auth-ambient-glow glow-top"></div>
+  <div class="auth-ambient-glow glow-bottom"></div>
+
+  <main class="auth-container">
+    
+    <!-- Portal Header -->
+    <header class="auth-header">
+      <div class="auth-brand-logo">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+      <div class="auth-badge-tag">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>RESTRICTED MINING AUTHORITY GATEWAY</span>
+      </div>
+      <h1 class="auth-title">ORE<span>FINDER-AI</span></h1>
+      <p class="auth-tagline">
+        Space Remote Sensing, 3D Voxel Reserves &amp; Operational Shortfall Intelligence
+      </p>
+    </header>
+
+    <!-- Main Auth Card -->
+    <div class="auth-card">
+      
+      <!-- Dual Tab Navigation: Sign In vs Sign Up -->
+      <div class="auth-tab-switch">
+        <button type="button" class="auth-tab-btn active" id="tabBtnSignIn">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Sign In</span>
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabBtnSignUp">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Sign Up</span>
+        </button>
+      </div>
+
+      <!-- Notification Feedback Alert -->
+      <div class="auth-alert" id="authAlert" style="display: none;">
+        <i class="fa-solid fa-circle-info" id="alertIcon"></i>
+        <span id="alertMsg">Authentication Message</span>
+      </div>
+
+      <!-- ====================================================================
+           TAB PANEL 1: SIGN IN
+           ==================================================================== -->
+      <div class="auth-tab-panel active" id="panelSignIn">
+        
+        <!-- Quick Demo Accounts (1-Click Fill) -->
+        <div class="demo-fill-box">
+          <div class="demo-fill-header">
+            <i class="fa-solid fa-bolt" style="color: var(--accent-orange);"></i>
+            <span>Quick-Fill Demo Credentials:</span>
+          </div>
+          <div class="demo-fill-grid">
+            <button type="button" class="demo-pill" data-id="MOIL-DIR-01" data-pass="Mines@2026">
+              <i class="fa-solid fa-user-tie"></i>
+              <span><strong>Mine Director</strong> (MOIL-DIR-01)</span>
+            </button>
+            <button type="button" class="demo-pill" data-id="MOIL-GEO-07" data-pass="Mines@2026">
+              <i class="fa-solid fa-gem"></i>
+              <span><strong>Chief Geologist</strong> (MOIL-GEO-07)</span>
+            </button>
+            <button type="button" class="demo-pill demo-instant" id="btnInstantDemo">
+              <i class="fa-solid fa-rocket"></i>
+              <span><strong>Instant Demo Guest</strong> (1-Click)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sign In Form -->
+        <form id="formSignIn" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="loginId">
+              <i class="fa-solid fa-id-badge"></i> OFFICER ID / USERNAME / EMAIL
+            </label>
+            <div class="input-box">
+              <input 
+                type="text" 
+                id="loginId" 
+                placeholder="e.g. MOIL-DIR-01 or director@moil.gov.in" 
+                autocomplete="username"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPass">
+              <i class="fa-solid fa-key"></i> SECURITY PASSWORD
+            </label>
+            <div class="input-box">
+              <input 
+                type="password" 
+                id="loginPass" 
+                placeholder="Enter your password" 
+                autocomplete="current-password"
+                required
+              >
+              <button type="button" class="btn-pwd-toggle" data-target="loginPass" title="Toggle password visibility">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-meta-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rememberMe" checked>
+              <span>Keep session active</span>
+            </label>
+            <span class="security-level-pill">
+              <i class="fa-solid fa-lock"></i> AES-256
+            </span>
+          </div>
+
+          <button type="submit" class="btn-auth-primary" id="btnSignInSubmit">
+            <i class="fa-solid fa-shield"></i>
+            <span>SIGN IN TO COMMAND</span>
+          </button>
+        </form>
+
+        <div class="auth-card-footer">
+          <span>New mining officer or evaluator?</span>
+          <button type="button" class="link-switch-tab" id="linkToSignUp">Create an account here</button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           TAB PANEL 2: SIGN UP (NEW ACCOUNT REGISTRATION)
+           ==================================================================== -->
+      <div class="auth-tab-panel" id="panelSignUp">
+        
+        <p class="signup-intro">
+          Register a new Mining Authority profile to access space telemetry, UNFC reserves, and AI simulation.
+        </p>
+
+        <!-- Sign Up Form -->
+        <form id="formSignUp" class="auth-form" novalidate>
+          
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="regName">
+                <i class="fa-solid fa-user"></i> FULL NAME *
+              </label>
+              <div class="input-box">
+                <input 
+                  type="text" 
+                  id="regName" 
+                  placeholder="e.g. Dr. Rajesh K. Sharma" 
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regId">
+                <i class="fa-solid fa-id-card"></i> OFFICER ID *
+              </label>
+              <div class="input-box">
+                <input 
+                  type="text" 
+                  id="regId" 
+                  placeholder="e.g. MOIL-ENG-24" 
+                  required
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">
+              <i class="fa-solid fa-envelope"></i> OFFICIAL EMAIL
+            </label>
+            <div class="input-box">
+              <input 
+                type="email" 
+                id="regEmail" 
+                placeholder="e.g. rajesh.sharma@moil.gov.in" 
+                autocomplete="email"
+              >
+            </div>
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="regOrg">
+                <i class="fa-solid fa-building-columns"></i> ORGANIZATION
+              </label>
+              <div class="input-box select-box">
+                <select id="regOrg">
+                  <option value="MOIL Limited" selected>MOIL Limited (Miniratna PSU)</option>
+                  <option value="DGMS Central Zone">DGMS (Mines Safety)</option>
+                  <option value="Ministry of Mines">Ministry of Mines, GoI</option>
+                  <option value="Geological Survey of India">Geological Survey of India (GSI)</option>
+                  <option value="State Mining Corporation">State Mining Directorate</option>
+                  <option value="Academic / Evaluation Jury">Hackathon Evaluation / Guest</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regRole">
+                <i class="fa-solid fa-award"></i> AUTHORITY ROLE
+              </label>
+              <div class="input-box select-box">
+                <select id="regRole">
+                  <option value="Mine Director / General Manager" selected>Mine Director / GM</option>
+                  <option value="Chief Mining Geologist">Chief Mining Geologist</option>
+                  <option value="DGMS Mines Safety Inspector">Safety Inspector</option>
+                  <option value="Operations &amp; Fleet Engineer">Operations Engineer</option>
+                  <option value="Remote Sensing Analyst">Space GIS Analyst</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="regPass">
+                <i class="fa-solid fa-lock"></i> PASSWORD *
+              </label>
+              <div class="input-box">
+                <input 
+                  type="password" 
+                  id="regPass" 
+                  placeholder="At least 5 characters" 
+                  autocomplete="new-password"
+                  required
+                >
+                <button type="button" class="btn-pwd-toggle" data-target="regPass">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regConfirmPass">
+                <i class="fa-solid fa-check-double"></i> CONFIRM *
+              </label>
+              <div class="input-box">
+                <input 
+                  type="password" 
+                  id="regConfirmPass" 
+                  placeholder="Re-enter password" 
+                  autocomplete="new-password"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-auth-primary" id="btnSignUpSubmit">
+            <i class="fa-solid fa-user-check"></i>
+            <span>CREATE ACCOUNT &amp; ENTER COMMAND</span>
+          </button>
+        </form>
+
+        <div class="auth-card-footer">
+          <span>Already registered?</span>
+          <button type="button" class="link-switch-tab" id="linkToSignIn">Sign In with your credentials</button>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="auth-portal-footer">
+      <span>ORE FINDER-AI • Government of India Mining Intelligence System</span>
+    </footer>
+  </main>
+
+  <!-- Interactive Auth Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tabs
+      const tabSignIn = document.getElementById('tabBtnSignIn');
+      const tabSignUp = document.getElementById('tabBtnSignUp');
+      const panelSignIn = document.getElementById('panelSignIn');
+      const panelSignUp = document.getElementById('panelSignUp');
+      const linkToSignUp = document.getElementById('linkToSignUp');
+      const linkToSignIn = document.getElementById('linkToSignIn');
+
+      // Alerts
+      const alertBox = document.getElementById('authAlert');
+      const alertIcon = document.getElementById('alertIcon');
+      const alertMsg = document.getElementById('alertMsg');
+
+      function showAlert(msg, isSuccess = false) {
+        alertMsg.textContent = msg;
+        alertBox.className = isSuccess ? 'auth-alert alert-success' : 'auth-alert alert-error';
+        alertIcon.className = isSuccess ? 'fa-solid fa-circle-check' : 'fa-solid fa-triangle-exclamation';
+        alertBox.style.display = 'flex';
+      }
+
+      function hideAlert() {
+        alertBox.style.display = 'none';
+      }
+
+      function showSignIn() {
+        tabSignIn.classList.add('active');
+        tabSignUp.classList.remove('active');
+        panelSignIn.classList.add('active');
+        panelSignUp.classList.remove('active');
+        hideAlert();
+      }
+
+      function showSignUp() {
+        tabSignUp.classList.add('active');
+        tabSignIn.classList.remove('active');
+        panelSignUp.classList.add('active');
+        panelSignIn.classList.remove('active');
+        hideAlert();
+      }
+
+      tabSignIn.addEventListener('click', showSignIn);
+      tabSignUp.addEventListener('click', showSignUp);
+      linkToSignUp.addEventListener('click', showSignUp);
+      linkToSignIn.addEventListener('click', showSignIn);
+
+      // Password Eye Toggles
+      document.querySelectorAll('.btn-pwd-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.dataset.target;
+          const input = document.getElementById(targetId);
+          if (input) {
+            const isPwd = input.type === 'password';
+            input.type = isPwd ? 'text' : 'password';
+            btn.querySelector('i').className = isPwd ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+          }
+        });
+      });
+
+      // Quick Demo Pills
+      document.querySelectorAll('.demo-pill[data-id]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('loginId').value = btn.dataset.id;
+          document.getElementById('loginPass').value = btn.dataset.pass;
+          hideAlert();
+          
+          btn.style.borderColor = 'var(--accent-orange)';
+          setTimeout(() => btn.style.borderColor = '', 600);
+        });
+      });
+
+      // Instant Demo Guest Login
+      const btnInstantDemo = document.getElementById('btnInstantDemo');
+      if (btnInstantDemo) {
+        btnInstantDemo.addEventListener('click', () => {
+          showAlert('Starting instant guest demonstration session...', true);
+          window.AuthService.loginAsGuest();
+          setTimeout(() => {
+            window.location.replace('index.html');
+          }, 450);
+        });
+      }
+
+      // Handle Sign In Submission
+      const formSignIn = document.getElementById('formSignIn');
+      formSignIn.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideAlert();
+
+        const id = document.getElementById('loginId').value.trim();
+        const pass = document.getElementById('loginPass').value;
+        const remember = document.getElementById('rememberMe').checked;
+
+        if (!id) {
+          showAlert('Please enter your Officer ID or Email.');
+          document.getElementById('loginId').focus();
+          return;
+        }
+
+        if (!pass) {
+          showAlert('Please enter your security password.');
+          document.getElementById('loginPass').focus();
+          return;
+        }
+
+        const btn = document.getElementById('btnSignInSubmit');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>VERIFYING CREDENTIALS...</span>';
+
+        try {
+          const res = await window.AuthService.login(id, pass, remember);
+          if (res.success) {
+            showAlert(`Access granted! Welcome, ${res.user.name}.`, true);
+            setTimeout(() => {
+              window.location.replace('index.html');
+            }, 450);
+          } else {
+            showAlert(res.message || 'Authentication failed. Please check credentials.');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-shield"></i> <span>SIGN IN TO COMMAND</span>';
+          }
+        } catch (err) {
+          showAlert('Sign In error occurred. Please try again.');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-shield"></i> <span>SIGN IN TO COMMAND</span>';
+        }
+      });
+
+      // Handle Sign Up Submission
+      const formSignUp = document.getElementById('formSignUp');
+      formSignUp.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideAlert();
+
+        const name = document.getElementById('regName').value.trim();
+        const officerId = document.getElementById('regId').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const organization = document.getElementById('regOrg').value;
+        const role = document.getElementById('regRole').value;
+        const pass = document.getElementById('regPass').value;
+        const confirmPass = document.getElementById('regConfirmPass').value;
+
+        if (!name) {
+          showAlert('Please enter your full name.');
+          document.getElementById('regName').focus();
+          return;
+        }
+
+        if (!officerId) {
+          showAlert('Please choose an Officer ID / Username.');
+          document.getElementById('regId').focus();
+          return;
+        }
+
+        if (!pass) {
+          showAlert('Please enter a password.');
+          document.getElementById('regPass').focus();
+          return;
+        }
+
+        if (pass.length < 5) {
+          showAlert('Password must be at least 5 characters.');
+          document.getElementById('regPass').focus();
+          return;
+        }
+
+        if (pass !== confirmPass) {
+          showAlert('Passwords do not match. Please re-enter.');
+          document.getElementById('regConfirmPass').focus();
+          return;
+        }
+
+        const btn = document.getElementById('btnSignUpSubmit');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>CREATING ACCOUNT...</span>';
+
+        try {
+          const res = await window.AuthService.signUp({
+            name,
+            officerId,
+            email,
+            organization,
+            role,
+            password: pass
+          });
+
+          if (res.success) {
+            showAlert(`Account created successfully! Welcome, ${res.user.name}. Redirecting to dashboard...`, true);
+            setTimeout(() => {
+              window.location.replace('index.html');
+            }, 600);
+          } else {
+            showAlert(res.message || 'Registration failed.');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-user-check"></i> <span>CREATE ACCOUNT &amp; ENTER COMMAND</span>';
+          }
+        } catch (err) {
+          showAlert('Registration error occurred. Please try again.');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-user-check"></i> <span>CREATE ACCOUNT &amp; ENTER COMMAND</span>';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
