@@ -1195,6 +1195,9 @@ input[type="range"] {
 
 @keyframes slideInToast {
   from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 /* ==========================================================================
    AUTHENTICATION & USER REGISTRATION (SIGN IN / SIGN UP)
    ========================================================================== */

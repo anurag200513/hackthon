@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=public/index.html">
+  <meta http-equiv="refresh" content="0; url=login.html">
   <title>ORE FINDER-AI Platform</title>
   <script>
     var token = sessionStorage.getItem('orefinder_session_token') || localStorage.getItem('orefinder_session_token');
     if (token) {
-      window.location.replace("public/index.html");
+      window.location.replace("index.html");
     } else {
-      window.location.replace("public/login.html");
+      window.location.replace("login.html");
     }
   </script>
 </head>
 <body style="background: #090d14; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
-  <p>Authenticating ORE FINDER-AI Session... <a href="public/login.html" style="color: #ff6b00;">Click here if not redirected</a>.</p>
+  <p>Authenticating ORE FINDER-AI Session... <a href="login.html" style="color: #ff6b00;">Click here if not redirected</a>.</p>
 </body>
 </html>

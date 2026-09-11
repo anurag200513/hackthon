@@ -9,7 +9,7 @@ import os
 import json
 import time
 import mimetypes
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import HTTPServer, ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
 # Import data engine
@@ -127,16 +127,28 @@ class MoilRequestHandler(BaseHTTPRequestHandler):
             self.send_json({"status": "healthy", "service": "ORE FINDER-AI Engine"})
             return
 
-        # Serve static assets from public/
+        # Serve static assets from public/ (supporting both /login.html and /public/login.html)
         if path == "/" or path == "":
             rel_path = "index.html"
         else:
             rel_path = path.lstrip("/")
 
+        # Strip public/ prefix if present
+        if rel_path.startswith("public/"):
+            rel_path = rel_path[len("public/"):]
+        elif rel_path.startswith("public\\"):
+            rel_path = rel_path[len("public\\"):]
+
         file_path = os.path.join(PUBLIC_DIR, rel_path)
+        if not os.path.exists(file_path):
+            # Check root directory fallback (e.g. root index.html)
+            alt_path = os.path.join(BASE_DIR, rel_path)
+            if os.path.exists(alt_path) and os.path.isfile(alt_path):
+                file_path = alt_path
 
         # Prevent directory traversal
-        if not os.path.commonpath([PUBLIC_DIR, os.path.abspath(file_path)]).startswith(PUBLIC_DIR):
+        abs_file = os.path.abspath(file_path)
+        if not (os.path.commonpath([PUBLIC_DIR, abs_file]).startswith(PUBLIC_DIR) or os.path.commonpath([BASE_DIR, abs_file]).startswith(BASE_DIR)):
             self.send_error(403, "Access Denied")
             return
 
@@ -278,7 +290,7 @@ if __name__ == "__main__":
         sys.exit(0)
 
     server_address = ("", PORT)
-    httpd = HTTPServer(server_address, MoilRequestHandler)
+    httpd = ThreadingHTTPServer(server_address, MoilRequestHandler)
     print(f"============================================================")
     print(f">> ORE FINDER-AI Server listening on http://localhost:{PORT}")
     print(f">> Space Exploration | 3D Voxel Reserves | Shortfall Predictor")
