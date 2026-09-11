@@ -15,6 +15,7 @@ class AppController {
   }
 
   async init() {
+    this.initOfficerProfile();
     this.bindTabNavigation();
     this.bindMineSelector();
     this.bindModal();
@@ -22,6 +23,25 @@ class AppController {
 
     // Load initial mine data
     await this.loadMineData(this.activeMineId);
+  }
+
+  initOfficerProfile() {
+    const officer = window.AuthService ? window.AuthService.getOfficer() : null;
+    if (officer) {
+      const nameEl = document.getElementById('headerOfficerName');
+      const roleEl = document.getElementById('headerOfficerRole');
+      if (nameEl) nameEl.textContent = officer.name.split(' ')[0] + ' ' + (officer.name.split(' ')[1] || '');
+      if (roleEl) roleEl.textContent = officer.id;
+    }
+
+    const signOutBtn = document.getElementById('btnSignOut');
+    if (signOutBtn && window.AuthService) {
+      signOutBtn.addEventListener('click', () => {
+        if (confirm('Sign out of Mining Authority clearance session?')) {
+          window.AuthService.logout();
+        }
+      });
+    }
   }
 
   bindTabNavigation() {

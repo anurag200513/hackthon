@@ -1195,7 +1195,534 @@ input[type="range"] {
 
 @keyframes slideInToast {
   from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: translateX(0); }
+/* ==========================================================================
+   MINING AUTHORITY AUTHENTICATION & LOGIN PORTAL
+   ========================================================================== */
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #070709;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+}
+
+.login-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-bg-glow.glow-top {
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.18), transparent 70%);
+}
+
+.login-bg-glow.glow-bottom {
+  bottom: -150px;
+  right: 15%;
+  width: 450px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.12), transparent 70%);
+}
+
+.login-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 520px;
+  padding: 32px 20px;
+  margin: auto;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.auth-crest {
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.crest-icon-ring {
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(245, 158, 11, 0.05));
+  border: 1px solid var(--border-orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--accent-orange);
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+.auth-pulse-dot {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 11px;
+  height: 11px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+  border: 2px solid #070709;
+  box-shadow: 0 0 8px var(--accent-orange);
+  animation: pulseAnim 2s infinite ease-in-out;
+}
+
+.auth-security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--accent-orange);
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.35);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.auth-title span {
+  color: var(--accent-orange);
+}
+
+.auth-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  max-width: 440px;
+}
+
+/* Authentication Card */
+.login-card {
+  background: rgba(18, 18, 22, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-orange);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(255, 107, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.card-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.status-live-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent-emerald);
+}
+
+.classification-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--accent-amber);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+/* Demo Badges Grid */
+.demo-accounts-wrapper {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.demo-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.demo-badge-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.demo-badge-btn i {
+  font-size: 1rem;
+  color: var(--accent-orange);
+}
+
+.demo-badge-btn strong {
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  display: block;
+}
+
+.demo-badge-btn small {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.demo-badge-btn:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
+}
+
+/* Form inputs */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.input-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-field-group label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.input-field-group label i {
+  color: var(--accent-orange);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 11px 14px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #fff;
+  outline: none;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.input-icon-right {
+  padding-right: 14px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.btn-toggle-pwd {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 0 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.15s ease;
+}
+
+.btn-toggle-pwd:hover {
+  color: var(--accent-orange);
+}
+
+.select-wrapper select {
+  width: 100%;
+  background: var(--bg-primary);
+  border: none;
+  padding: 11px 14px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.select-wrapper select option {
+  background: #121215;
+  color: #fff;
+  padding: 6px;
+}
+
+.form-aux-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.remember-label input[type="checkbox"] {
+  accent-color: var(--accent-orange);
+  cursor: pointer;
+}
+
+.security-protocol {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+/* Alert & Verification Scan */
+.auth-alert-box {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--accent-rose);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: shakeAlert 0.3s ease;
+}
+
+@keyframes shakeAlert {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.auth-verification-box {
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid var(--border-orange);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-bar {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff6b00, transparent);
+  animation: scanAnim 1.2s infinite ease-in-out;
+}
+
+@keyframes scanAnim {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.verification-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+/* Submit button */
+.btn-auth-submit {
+  background: linear-gradient(135deg, #ff6b00, #ea580c);
+  color: #000;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px 20px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 18px rgba(255, 107, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-auth-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 107, 0, 0.55);
+}
+
+.login-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.footer-security-notice {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.footer-disclaimer {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Header Officer Badge & Sign Out in Dashboard */
+.officer-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  transition: border-color 0.2s ease;
+}
+
+.officer-profile-badge i {
+  color: var(--accent-orange);
+  font-size: 0.85rem;
+}
+
+.officer-info {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.officer-name {
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.officer-clearance {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.15);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  white-space: nowrap;
+}
+
+.btn-sign-out {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-sign-out:hover {
+  border-color: var(--accent-rose);
+  color: var(--accent-rose);
+  background: rgba(239, 68, 68, 0.1);
 }
 
 /* Stockpile Blending LP Cards */
@@ -1596,6 +2123,26 @@ input[type="range"] {
     width: 100%;
     padding: 10px 14px;
     font-size: 0.78rem;
+  }
+
+  /* Mobile Login Page & Officer Badge Adjustments */
+  .login-container {
+    padding: 20px 12px;
+  }
+  .login-card {
+    padding: 20px 16px;
+    gap: 14px;
+  }
+  .demo-badges-grid {
+    grid-template-columns: 1fr;
+  }
+  .officer-profile-badge {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+  .btn-sign-out {
+    padding: 5px 8px;
+    font-size: 0.68rem;
   }
 }
 
