@@ -476,6 +476,41 @@
             </div>
           </div>
 
+          <!-- Directive Email Dispatch Configuration Section -->
+          <div class="ui-card dispatch-email-card" style="border-color: rgba(255, 107, 0, 0.4); background: linear-gradient(145deg, rgba(20, 24, 33, 0.95), rgba(13, 17, 23, 0.95)); margin-bottom: 12px; padding: 14px 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-paper-plane" style="color: var(--accent-orange); font-size: 0.95rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">Directive Email Dispatch Relay</span>
+                <span class="badge-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.68rem;">Live Dispatch</span>
+              </div>
+              <span style="font-size: 0.72rem; color: var(--text-muted);">
+                <i class="fa-solid fa-info-circle"></i> Applying any action below will transmit full directive telemetry to this email
+              </span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <div style="position: relative; flex: 1; min-width: 250px;">
+                <i class="fa-solid fa-envelope" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--accent-orange); font-size: 0.85rem;"></i>
+                <input 
+                  type="email" 
+                  id="simDispatchEmail" 
+                  value="amuduli764@gmail.com" 
+                  placeholder="Enter recipient email (e.g. amuduli764@gmail.com)" 
+                  style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 9px 12px 9px 36px; color: #fff; font-size: 0.85rem; font-family: var(--font-mono); outline: none; transition: border-color 0.2s;"
+                />
+              </div>
+              <button 
+                type="button" 
+                id="btnTestEmailDispatch" 
+                class="action-btn-trigger" 
+                style="padding: 8px 16px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;"
+                title="Send a verification test email ping to this address"
+              >
+                <i class="fa-solid fa-paper-plane"></i> Test Mail
+              </button>
+            </div>
+          </div>
+
           <!-- Prescriptive Corrective Action Cards -->
           <div class="action-cards-container" id="actionCardsList"></div>
         </div>

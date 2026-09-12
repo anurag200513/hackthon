@@ -1145,6 +1145,20 @@ input[type="range"] {
   box-shadow: 0 0 12px rgba(255, 107, 0, 0.4);
 }
 
+.action-btn-trigger.loading {
+  opacity: 0.85;
+  cursor: wait;
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+}
+
+.action-btn-trigger.success {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
 /* ==========================================================================
    MODAL POPUP & TOAST NOTIFICATIONS
    ========================================================================== */
